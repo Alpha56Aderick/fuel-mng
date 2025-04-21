@@ -1,0 +1,69 @@
+/* Root container for the navigation bar */
+.navigation-bar {
+  position: relative;
+  top: 0;
+  z-index: 50;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--muted);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 5px; /* Space items evenly */
+}
+
+/* Individual navigation link */
+.nav-link {
+  display: flex;
+  flex-direction: row; /* Place icon and text side by side by default */
+  align-items: center; /* Vertically center icon and text */
+  gap: 0.5rem; /* Add spacing between icon and text */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--foreground);
+  transition: color 0.2s;
+  position: relative; /* For underline effects */
+}
+
+/* Add the blue line animation on hover */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Position the line below the text */
+  left: 0;
+  width: 0; /* Start with no width */
+  height: 3px; /* Thickness of the line */
+  background-color: blue; /* Blue color for the line */
+  transition: width 0.3s ease; /* Smooth animation for the line */
+}
+
+/* Expand the blue line on hover */
+.nav-link:hover::after {
+  width: 100%; /* Expand the line to full width */
+}
+
+/* Always show the text */
+.nav-link-text {
+  opacity: 1;
+  visibility: visible;
+  transition: none; /* No transition needed since it's always visible */
+}
+
+/* Active navigation link */
+.nav-link-active {
+  color: var(--accent-foreground);
+}
+
+/* Blue bar below the active link */
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Position the bar below the text */
+  left: 0;
+  right: 0;
+  height: 3px; /* Thickness of the bar */
+  background-color: blue; /* Blue color for the bar */
+  border-radius: 2px; /* Slightly rounded corners */
+}
