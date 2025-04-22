@@ -68,7 +68,7 @@ const PumpManagement = () => {
               }}
             />
           ))}
-          <AddPumpCard onAddPump={handleAddPump} />
+          <AddPumpCard />
         </div>
       </div>
     </div>
