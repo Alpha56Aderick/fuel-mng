@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PumpCard } from "@/components/Pump/PumpCard";
 import { AddPumpCard } from "@/components/Pump/AddPumpCard";
 import { Button } from "@/components/ui/button";
@@ -16,26 +16,20 @@ export interface Pump {
 }
 
 const PumpManagement = () => {
-  const [pumps, setPumps] = useState<Pump[]>([
-    {
-      id: "1",
-      name: "Pump 1",
-      fuelType: "Diesel",
-      status: "active",
-      health: "good",
-      lastMaintenance: "2025-03-15",
-      nextMaintenance: "2025-04-15"
-    },
-    {
-      id: "2",
-      name: "Pump 2",
-      fuelType: "Unleaded",
-      status: "maintenance",
-      health: "warning",
-      lastMaintenance: "2025-03-01",
-      nextMaintenance: "2025-04-01"
+  const [pumps, setPumps] = useState<Pump[]>([]);
+
+  // Load pumps from localStorage on mount
+  useEffect(() => {
+    const storedPumps = localStorage.getItem('pumps');
+    if (storedPumps) {
+      setPumps(JSON.parse(storedPumps));
     }
-  ]);
+  }, []);
+
+  // Update localStorage whenever pumps state changes
+  useEffect(() => {
+    localStorage.setItem('pumps', JSON.stringify(pumps));
+  }, [pumps]);
 
   const handleAddPump = (newPump: Omit<Pump, "id">) => {
     const pump: Pump = {
